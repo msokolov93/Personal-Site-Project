@@ -629,7 +629,23 @@ window.onload = function() {
 	//    == Person code start ==
 	
 	drawTransition.prototype.toPerson = function(){
+		/*transform: scaleY(-1); // value goes 1 to -100
+		transform: rotate(90deg); // value goes 0 to 90 */
+		// But rotations are performed around the point with respect to distance from dot to rotation point.
+		// is it possible to make transition seamless??
 		
+		// Discrete persists in gradient solution, tears are inevitable
+		
+		// contour (line-curve-curve-line) is a "rail" for this animation - 
+		// animation is a carriage that at the start 
+		
+		// lets look the carrige only
+		// gradient transform is needed
+		
+		// lets take all pixels in carrige - N pixels fills 100% of transformation, so every pixel is doing just
+		// 100/N % of transform. But is it possible to send 
+		
+		// every pixel gets transformed 
 	}
 	
 	//    || Person code end ||
