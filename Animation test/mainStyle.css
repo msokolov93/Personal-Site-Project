@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'DINPro-Light';
+    src: url(fonts/DINPro-Light.otf);
+}
+
+@font-face {
+    font-family: 'DINPro-Regular';
+    src: url(fonts/DINPro-Regular.otf);
+}
+
+@font-face {
+    font-family: 'Luganskiy';
+    src: url(fonts/LuganskiyV.otf);
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	border: 0;
+	overflow: hidden; /*  Disable scrollbars */
+	display: block;  /* No floating content on sides */
+	background-color: black;
+}
+
+.p{
+	font-family: Luganskiy;
+}
+
+.wrapper{
+	font-family: Luganskiy;
+	font-size: 24px;
+}
+
+.CanvasContainer{
+	position: absolute;
+	height: 1000px;
+	width: 1000px;
+	
+	left: 0;
+	top: 0;
+	
+	margin: 0 auto;
+	
+	
+	
+	text-transform: uppercase;
+}
+/*
+.CanvasMenu{
+	position: absolute;
+	width: 500px;
+	height: 500px;
+	
+	left: 50%;
+	margin: 0 0 0 -250px;
+	
+}
+
+.CanvasBack{
+	position: absolute;
+	width: 100%;
+	height: 500px;
+	left: 0;
+	top: 0;
+	
+}*/
+
+
+.target{
+	position: absolute;
+
+	/* background-color: red; */
+}

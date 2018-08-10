@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'DINPro-Light';
+    src: url(fonts/DINPro-Light.otf);
+}
+
+@font-face {
+    font-family: 'DINPro-Regular';
+    src: url(fonts/DINPro-Regular.otf);
+}
+
+@font-face {
+    font-family: 'Luganskiy';
+    src: url(fonts/LuganskiyV.otf);
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	font-family: DINPro-Light;
+	font-size: 14px;
+}
+
+.target{
+	position: absolute;
+
+	/* background-color: red; */
+}
