@@ -4,22 +4,30 @@
 		<meta charset="utf-8">
 		<title>Michael Sokolov</title>
 		<link rel="stylesheet" type="text/css" href="mainStyle.css">
+		<link rel="stylesheet" type="text/css" href="HomeButton.css">
 		<script src="mainScript.js"></script> 
 	</head>
   <body>
 	<div class="wrapper" width="100%" height="100%">
-		<div class="CanvasContainer">
+		<div class="ResumeContainer" id="resumecontainer">
+			<div class="ResumeDiv" id="resumediv">
+				<table id="homeButton"> 
+					<tr>
+						<td><button class="btnHome" id="home2">ABOUT</button></td>		
+						<td><button class="btnHomeMain" id="home0"></button></td>
+						<td><button class="btnHome" id="home1">PERSON</button></td>
+					</tr>
+				</table>
+				<iframe id="iframe" frameborder="0" src="">
+				</iframe>
+			</div>
+		</div>
+		<div class="CanvasContainer" id="canvascontainer">
 			<canvas id="actionCanvas" width="500px" height="500px" style="position: absolute; z-index: 50";></canvas>
 			<canvas id="backgroundCanvas" width="100%" height="500px"; style="position: absolute; z-index: 1;"></canvas>
-		</div>
-		
-		<!-- 
-		<div id="resumeDoc">
-		<img src="img/Resume.png">		
-		<iframe align="middle" src="https://docs.google.com/document/d/e/2PACX-1vQq4vY0nm2R8bnZ58cHlp_fHo7qU5GKb6BxHsCFIZ4y_rBrLE0waAYgAseAKCPMQtwgwkRWg_Y66G8h/pub?embedded=true" ></iframe> 
-		-->
-		
+		</div>		
 		</div> 
 	</div>
   </body>
+  <script src="HomeButton.js"></script>
 </html>    

@@ -41,17 +41,11 @@ window.onload = function() {
 		
 		setCanvas();	// set canvas layers and style
 		
-		initDocs(); // 
-		
 		initEvents();	// assign events
 		
 		initConstructors(); // runs construction methods
 		
 		initUpdated();  // draw curves and text
-	}
-	
-	function initDocs(){
-		//document.getElementById("resumeDoc").style.visibility = "visible";
 	}
 	
 	function initEvents(){ 
@@ -407,6 +401,10 @@ window.onload = function() {
 	
 	//    == Resume code start ==
 	
+	function initDocs(){
+
+	}
+	
 	drawTransition.prototype.toResume = function(){
 		switch (drawTransition.resumeState){			
 			case 0: 
@@ -414,6 +412,11 @@ window.onload = function() {
 			break;
 			case 1: 
 				drawTransition.resumeStateTwo(ctx1);
+			break;
+			case 2:
+				drawTransition.resumeStateThree();
+			break;
+			default:
 			break;
 		}
 	}
@@ -458,7 +461,8 @@ window.onload = function() {
 			drawMain.curves[0].y = drawMain.curves[1].y;
 			drawMain.curves[1].y = drawMain.curves[2].y;
 			this.median = drawMain.curves[1].y;
-			ctx2.fillStyle = "rgba(82, 86, 89, 1)";
+			//ctx2.fillStyle = "rgba(82, 86, 89, 1)"; // pdf background color
+			ctx2.fillStyle = "rgba(255, 255, 255, 1)";
 			ctx2.fillRect(0,0,window.innerWidth,window.innerHeight);
 		}
 	}
@@ -469,7 +473,7 @@ window.onload = function() {
 		
 		context.save();
 		context.clearRect(0, drawMain.lines[1].y, window.innerWidth, drawMain.lines[2].y - drawMain.lines[1].y );
-		context.fillStyle = "rgba(255, 255, 255, "+ Math.cos(this.alpha) +")";
+		context.fillStyle = "rgba(0, 0, 0, "+ Math.cos(this.alpha) +")";
 		context.fillRect(0, drawMain.lines[1].y, window.innerWidth, drawMain.lines[2].y - drawMain.lines[1].y );
 		context.restore();
 		
@@ -503,11 +507,24 @@ window.onload = function() {
 		drawMain.drawName(context, drawMain.curves[2], drawMain.curves[3], "PERSON");
 		if (Math.sin(this.alpha) == 1){
 			this.resumeState = 2;
-			ctx1.clearRect(0, 0, window.innerWidth, window.innerHeight);
-			document.getElementById("actionCanvas").style.visibility = "hidden";
+			//ctx1.clearRect(0, 0, window.innerWidth, window.innerHeight);
+			//document.getElementById("actionCanvas").style.visibility = "hidden";
 			//document.getElementById("resumedoc").style.zIndex = "100";
 		}		
+	
 	}		
+	
+	drawTransition.prototype.resumeStateThree = function(context){
+		document.getElementById("canvascontainer").style.display = "none";
+		document.getElementById("resumecontainer").style.display = "block";
+		var iframe = document.getElementById("iframe");
+		iframe.src = "https://docs.google.com/document/d/e/2PACX-1vTH1rrEZw_vCU4DcB1hvA6kGtEZF18kN4i2eno-bb6idqxZAHuoGyfANAZlWGOoMCYYy_JAbbQ1XyD0/pub?embedded=true";
+		iframe.style.visibility = "visible";
+		document.body.style.overflow = "scroll";
+		//document.getElementById("actionCanvas").style.display = "none";
+		//document.getElementById("backgroundCanvas").style.display = "none";
+		this.resumeState = 3;
+	}
 	
 	//    || Resume code end ||
 	

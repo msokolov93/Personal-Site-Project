@@ -32,6 +32,33 @@ body {
 	font-size: 24px;
 }
 
+.ResumeContainer{
+	display: none;
+	position: absolute;
+	height: 100%;
+	width: 100%;	
+	left: 0;
+	top: 0;	
+	margin: 0 auto;	
+}
+
+.ResumeDiv{
+	margin: 0 auto;
+	min-width: 640px;
+	max-width: 825px;
+} 
+
+#iframe{
+	visibility: hidden;
+	width: 100%;
+	min-width: 640px;
+	min-height: 1700px;
+}
+
+#homeButton{
+    margin: 20px auto 0px;
+}
+
 .CanvasContainer{
 	position: absolute;
 	height: 100%;
@@ -41,49 +68,6 @@ body {
 	margin: 0 auto;	
 }
 
-#resumeDoc{
-	position:absolute;
-	visibility: hidden;
-	top: 50px;
-	width: 100%;
-	height: 100%;
-	margin: 0 auto;
-	z-index: 40 !important;
-	overflow: visible; 
-}
-
-#resumeDoc iframe{
-	display: block;
-	width: 840px;
-	height: 100%;
-	margin: 0 auto;
-	bottom: 50px;
-	border: 0;
-	overflow: visible; 
-}
-/*
-.CanvasMenu{
-	position: absolute;
-	width: 500px;
-	height: 500px;
-	
-	left: 50%;
-	margin: 0 0 0 -250px;
-	
-}
-
-.CanvasBack{
-	position: absolute;
-	width: 100%;
-	height: 500px;
-	left: 0;
-	top: 0;
-	
-}*/
-
-
 .target{
 	position: absolute;
-
-	/* background-color: red; */
 }

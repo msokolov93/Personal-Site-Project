@@ -1,12 +1,13 @@
 msokolov.xyz Todo List
 
+General: 
+
+- Load whole website in one piece (loading animation)
+
 Main Page:
 
-	- Be sure empty div is in place to be filled with google docs iframe
-	- Test <iframe>
-	- Ajax loads google iframe after even of animation is called - check for lags
 	- Mobile devices event optimization
-	- Learn how to load other pages with Ajax
+	
 	
 	Person animation
 	
@@ -22,7 +23,9 @@ About Page:
 	
 Resume page:
 	
-	-check if iframe works in composition
+	Home Button:
+	- event "HOME" to show menu again with transition
+	- event "Resume", "About", "Person" to silently load other pages 
 	
 Person page: 
 
