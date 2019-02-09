@@ -21,17 +21,17 @@ clearTimeout(id);
 };
 }());
 
+// ===== Global objects and variables =====
+
+var targetFPS = 60;
+
+var FontSize = 24;
+
+var fpsInterval, startTime, now, then, elapsed;
+
 window.onload = function() {
-	
-	// ===== Global objects and variables =====
-	
-	var targetFPS = 60;
-	
-	var FontSize = 24;
-	
-	var fpsInterval, startTime, now, then, elapsed;
-	
-	var ctx1, ctx2;
+
+
 	
 	// ===== Function declarations start =====
 	
@@ -39,21 +39,23 @@ window.onload = function() {
 	
 	function init(){
 		
-		setCanvas();	// set canvas layers and style
+		setCanvas();	// set canvas layers and style		
+		console.log("setCanvas working");
 		
 		initEvents();	// assign events
+		console.log("initEvents working");
 		
-		initConstructors(); // runs construction methods
+		initConstructors(); // runs construction methods		
 		
 		initUpdated();  // draw curves and text
 	}
 	
 	function initEvents(){ 
-		MouseHandler.eventHandler(canvas1);
+		mouseHandler.eventHandler(canvas1);
 	}
 	
 	function initConstructors(){
-		drawMain.Constructor(ctx1); 
+		drawMain.Constructor(ctx1, ctx2); 
 	}
 	
 	function initUpdated(){
@@ -63,7 +65,7 @@ window.onload = function() {
 	//  |||| Initialize operations end ||||
 	
 	//  ==== Canvas properties start ====
-	
+	/*
 	function setCanvas(){ // action ctx1; background ctx2
 		canvas1 = document.getElementById('actionCanvas');
 			ctx1 = canvas1.getContext("2d");
@@ -100,7 +102,7 @@ window.onload = function() {
 		context.fillRect(0, 0, window.innerWidth, window.innerHeight);
 		context.restore();
 	}
-	
+	*/
 	//  |||| Canvas properties end ||||	
 	
 	//  ==== Global screen scope start ====
@@ -124,14 +126,14 @@ window.onload = function() {
 	SceneHandler.prototype.Menu = function(){
 		switch (drawMain.transition){
 			case 0: 
-				drawMain.drawMenu();
+				drawMain.drawMenu(ctx1);
 			break;
 			case 1:
 				if ( drawMain.transition != 0 ){
 					drawTransition.toResume();
 				}
 				else {
-					drawMain.drawMenu();
+					drawMain.drawMenu(ctx1);
 				}						
 			break;
 			case 2:
@@ -168,7 +170,6 @@ window.onload = function() {
 				setCanvas();
 				drawMain.Constructor();
 			//}
-
 		}
 		canvas.onmousemove = function (e) {
 			MouseHandler.clientX = e.clientX;
@@ -189,6 +190,7 @@ window.onload = function() {
 		return this.clientY;
 	}
 	
+	
 	//   ||| Event handler class end |||
 	
 	//  |||| Global Screen scope end ||||
@@ -196,7 +198,7 @@ window.onload = function() {
 	//  ==== Main page scope start ====
 	
 	//   === Menu class start ===
-	
+	/*
 	function drawMain(endx = 640, endy = 640, lineSpan = 40, lineNum = 4, curveLength = 400, curveHeight = 75){ // sets const for scene
 		this.endx = endx;
 		this.endy = endy;
@@ -376,9 +378,9 @@ window.onload = function() {
 		}
 		return 1;
 	}
-			
+	*/	
 	//   ||| Menu class end |||		
-	
+
 	//   === Main transition code start ===
 	
 	function drawTransition(){ // static scope for transition animations
@@ -670,7 +672,7 @@ window.onload = function() {
 	//   ||| Main transition code end |||
 	
 	//   === Line class start ===
-	
+	/*
 	function Line (y = 0, gap = 400){
 		//this.endx = drawMain.endx;
 		this.y = y;
@@ -697,11 +699,11 @@ window.onload = function() {
 		context.stroke();		
 		context.restore();		
 	}
-
+	*/
 	//   ||| Line class end |||
 	
 	//   === Curve class start ===
-	
+	/*
 	function Curve (x = 0, y = 0 , length = 400, height = 75, shape = 0){ //class, not a constructor
 		this.x = x;
 		this.y = y;
@@ -788,7 +790,7 @@ window.onload = function() {
 			context.bezierCurveTo(x2, y2, x1, y1, x, y);
 		}	
 	}
-	
+	*/
 	//   ||| Curve class end |||
 	
 	//  |||| Main page scope end ||||
@@ -799,10 +801,9 @@ window.onload = function() {
 	
 	var drawTransition = new drawTransition();
 	var SceneHandler = new SceneHandler();
-	var MouseHandler = new MouseHandler();
-	var drawMain = new drawMain();
-
-	
+	//var MouseHandler = new MouseHandler();
+	//var drawMain = new drawMain();
+	//MouseHandler.ale();
 	init();	
 	
 	// ||||| Main end |||||
