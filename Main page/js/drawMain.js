@@ -1,6 +1,7 @@
+
 		//   === Menu class start ===
 	
-	function drawMain(endx = 640, endy = 640, lineSpan = 40, lineNum = 4, curveLength = 400, curveHeight = 75){ // sets const for scene
+	function DrawMain(endx = 640, endy = 640, lineSpan = 40, lineNum = 4, curveLength = 400, curveHeight = 75){ // sets const for scene
 		this.endx = endx;
 		this.endy = endy;
 		this.lineSpan = lineSpan;
@@ -11,20 +12,21 @@
 		this.transition = 0; // 0 - no transition, 1 - resume, 2 - about, 3 - person
 	}
 	
-	drawMain.prototype.Constructor = function(context1, context2){ // Puts in place static parts of menu page
+	DrawMain.prototype.Constructor = function(context1, context2){ // Puts in place static parts of menu page
 		drawMain.getCanvas(context1, context2); 
 		drawMain.createCurves();
 		drawMain.createLines();
 	}
 	
-	drawMain.prototype.getCanvas = function(context1, context2){ // gets resolution of canvas contexts
+	DrawMain.prototype.getCanvas = function(context1, context2){ // gets resolution of canvas contexts
 		this.endx = context1.canvas.width;
 		this.endy = context1.canvas.height;
+		//console.log("context1 size = [" + context1.canvas.width + "; " + context1.canvas.height + "] ");
 		this.ctxDynamic = context1;
 		this.ctxStatic = context2;
 	}
 	
-	drawMain.prototype.createLines = function(){ // creates array with lines
+	DrawMain.prototype.createLines = function(){ // creates array with lines
 		var height = this.lineSpan * this.lineNum;	
 		var y = Math.round( this.endy / 2 - height / 2 );
 		
@@ -34,13 +36,13 @@
 		}
 	}
 	
-	drawMain.prototype.drawLines = function(context){	// draw lineNum of curves in their current state
+	DrawMain.prototype.drawLines = function(context){	// draw lineNum of curves in their current state
 		for( let i = 0; i < this.lineNum; i++){
 			this.lines[i].drawLine(context);
 		}
 	}
 	
-	drawMain.prototype.clearLines = function(context){ 	// clears the lines from screen !*todo not to clear center*
+	DrawMain.prototype.clearLines = function(context){ 	// clears the lines from screen !*todo not to clear center*
 		for (let i = 0; i < 4 ; i++){
 			context.save();
 			context.fillStyle = 'rgb(255,255,255,1)';
@@ -49,7 +51,7 @@
 		}
 	}
 		
-	drawMain.prototype.createCurves = function(){ 		// create array of curves
+	DrawMain.prototype.createCurves = function(){ 		// create array of curves
 		var endx = this.endx;
 		var endy = this.endy;
 		
@@ -65,13 +67,13 @@
 		}
 	}
 	
-	drawMain.prototype.drawCurves = function(context){	// draw lineNum of curves in their current state
+	DrawMain.prototype.drawCurves = function(context){	// draw lineNum of curves in their current state
 		for (let i = 0; i < this.lineNum; i++){
 			this.curves[i].drawCurve(context);
 		}
 	}
 	
-	drawMain.prototype.clearCurves = function(context){ // clears the area with curves !*math incorrect*!
+	DrawMain.prototype.clearCurves = function(context){ // clears the area with curves !*math incorrect*!
 		var endx = drawMain.endx;
 		var endy = drawMain.endy;
 	
@@ -87,22 +89,20 @@
 		context.restore();
 	}
 	
-	drawMain.prototype.checkState = function(context){ // checks position of cursor and changes state of animation
-		var clientX = MouseHandler.getX;
-		var clientY = MouseHandler.getY;
-		//console.log('x = ' + clientX + '. y = ' + clientY);
+	DrawMain.prototype.checkState = function(context){ // checks position of cursor and changes state of animation
+		var clientX = mouseX;
+		var clientY = mouseY;
 		var cursorArea = drawMain.cursorArea(context, clientX, clientY);
 		drawMain.changeState(context, cursorArea);
 	}
 
-	drawMain.prototype.changeState = function(context, state){ // changes state of curve animation
+	DrawMain.prototype.changeState = function(context, state){ // changes state of curve animation
 		this.menuState = state;
 		if (state == 0){
 			for(var i = 0; i < this.lineNum; i++ ){
 				this.curves[i].setAim(0);
 			}
 		} else if (state != 0){
-			//console.log("new state = " + state);
 			for(var i = 0; i < this.lineNum; i++){
 				if( i < state ) {
 					this.curves[i].setAim(-1);
@@ -111,9 +111,10 @@
 				}
 			}
 		}
+		//console.log("menuState = " + this.menuState);
 	}	
 	
-	drawMain.prototype.cursorArea = function(context, clientX, clientY){ // returns value with number of area with cursor in it ( 0 - empty space, 1 - resume, etc )
+	DrawMain.prototype.cursorArea = function(context, clientX, clientY){ // returns value with number of area with cursor in it ( 0 - empty space, 1 - resume, etc )
 		var clientX = clientX;
 		var clientY = clientY;
 		var curvesState = 0; 
@@ -122,7 +123,7 @@
 			for(let i = 0 ; i < this.lineNum-1 ; i++){
 				this.pathArea(context, i);
 				if (context.isPointInPath(clientX, clientY)){ // spread the curves
-					curvesState = i+1;				
+					curvesState = i+1;	
 				}
 			}
 			return curvesState;
@@ -131,7 +132,7 @@
 			console.log("context is undefined in drawMain.cursorArea");
 	}
 	
-	drawMain.prototype.pathArea = function(context, curveNum){  // returns path of menu areas
+	DrawMain.prototype.pathArea = function(context, curveNum){  // returns path of menu areas
 		var curve1 = this.curves[curveNum];
 		var curve2 = this.curves[curveNum+1];
 		
@@ -147,7 +148,7 @@
 		context.restore();		
 	}
 	
-	drawMain.prototype.drawMenu = function(context1){ // sets the drawing functions for menu
+	DrawMain.prototype.drawMenu = function(context1){ // sets the drawing functions for menu
 		var context = context1;	 // context is set here
 		
 		if (drawMain.transition == 0){ // animation must finish before next phase
@@ -159,13 +160,13 @@
 		drawMain.drawMenuText(context);	
 	}
 		
-	drawMain.prototype.drawMenuText = function(context){ // draws text between the lines
+	DrawMain.prototype.drawMenuText = function(context){ // draws text between the lines
 		drawMain.drawName(context, this.curves[0], this.curves[1], "RESUME");
 		drawMain.drawName(context, this.curves[1], this.curves[2], "ABOUT");
 		drawMain.drawName(context, this.curves[2], this.curves[3], "PERSON");
 	}
 	
-	drawMain.prototype.drawName = function(context, curve1, curve2, word){	// draws a word between two curve !*curve object can be replaced with curve num*!
+	DrawMain.prototype.drawName = function(context, curve1, curve2, word){	// draws a word between two curve !*curve object can be replaced with curve num*!
 		var context = context;
 		
 		var x = Math.round( curve1.getCrestX() - context.measureText(word).width / 2 );
@@ -174,7 +175,7 @@
 		context.fillText(word, x, y);
 	}
 	
-	drawMain.prototype.checkAim = function(){ // checks if menu animation has finished
+	DrawMain.prototype.checkAim = function(){ // checks if menu animation has finished
 		for (let i = 0; i < this.lineNum; i++){
 			if ( this.curves[i].aim != this.curves[i].shape){
 				//console.log("curve[" + i + "] is not ready");
@@ -307,5 +308,4 @@
 	}
 	
 	//   ||| Curve class end |||
-	
-	var drawMain = new drawMain();
+	var drawMain = new DrawMain();

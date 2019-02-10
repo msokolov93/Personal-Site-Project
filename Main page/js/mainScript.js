@@ -27,27 +27,30 @@ var targetFPS = 60;
 
 var FontSize = 24;
 
+var mouseX = 0;
+
+var mouseY = 0;
+
 var fpsInterval, startTime, now, then, elapsed;
 
-window.onload = function() {
-
-
+window.onload = function(){
 	
 	// ===== Function declarations start =====
 	
 	//  ==== Initialize operations start ====
-	
 	function init(){
 		
 		setCanvas();	// set canvas layers and style		
-		console.log("setCanvas working");
+		console.log("setCanvas worked");
 		
 		initEvents();	// assign events
-		console.log("initEvents working");
+		console.log("initEvents worked");
 		
 		initConstructors(); // runs construction methods		
+		console.log("initConstructors worked");
 		
 		initUpdated();  // draw curves and text
+		console.log("initUpdated worked");
 	}
 	
 	function initEvents(){ 
@@ -59,7 +62,13 @@ window.onload = function() {
 	}
 	
 	function initUpdated(){
-		requestAnimationFrame(SceneHandler.Updated);
+		requestAnimationFrame(sceneHandler.Updated);
+	}
+	
+	function changeTransition(){
+		if (SceneHandler.scene == 0 && drawMain.transition == 0){
+			drawMain.transition = drawMain.menuState;
+		}
 	}
 	
 	//  |||| Initialize operations end ||||
@@ -114,16 +123,17 @@ window.onload = function() {
 	}
 	
 	SceneHandler.prototype.Updated = function(){
-		if (SceneHandler.scene == 0){
-			SceneHandler.Menu();
+		if (sceneHandler.scene == 0){
+			sceneHandler.Menu();
 		}
 		
 		setTimeout(function() {
-			requestAnimationFrame(SceneHandler.Updated);			
+			requestAnimationFrame(sceneHandler.Updated);			
 		}, 1000 / targetFPS);
 	}
 	
 	SceneHandler.prototype.Menu = function(){
+		//console.log("SceneHandler.Menu.switch is avaliable");
 		switch (drawMain.transition){
 			case 0: 
 				drawMain.drawMenu(ctx1);
@@ -159,24 +169,30 @@ window.onload = function() {
 	
 	//   === Event handler class start ===
 	
-	function MouseHandler(){
+	var MouseHandler = function(){
 		this.clientX = 0;
 		this.clientY = 0;
 	}
 	
 	MouseHandler.prototype.eventHandler = function(canvas){
-		window.onresize = function(){ // resize window event
-			//if( drawMain.transition != 0 ){
+		window.onresize = function(){ 
+		// resize window event
+			if( drawMain.transition != 0 ){
 				setCanvas();
 				drawMain.Constructor();
-			//}
+			}
 		}
 		canvas.onmousemove = function (e) {
 			MouseHandler.clientX = e.clientX;
 			MouseHandler.clientY = e.clientY;
+			mouseX = e.clientX;
+			mouseY = e.clientY;
 		}	
 		canvas.onclick = function (e) {
-			if (SceneHandler.scene == 0 && drawMain.transition == 0){
+			console.log("clicked at [" + e.clientX + "; " + e.clientY + "]; ");
+			console.log("sceneHandler.scene = " + sceneHandler.scene + "; drawMain.transition = " + drawMain.transition + "; ");
+			console.log("drawMain.menuState = " + drawMain.menuState);
+			if (sceneHandler.scene == 0 && drawMain.transition == 0){
 				drawMain.transition = drawMain.menuState;
 			}
 		}
@@ -800,9 +816,9 @@ window.onload = function() {
 	// ===== Main start =====
 	
 	var drawTransition = new drawTransition();
-	var SceneHandler = new SceneHandler();
-	//var MouseHandler = new MouseHandler();
-	//var drawMain = new drawMain();
+	var mouseHandler = new MouseHandler();
+	var sceneHandler = new SceneHandler();	
+	//svar drawMain = new DrawMain();
 	//MouseHandler.ale();
 	init();	
 	

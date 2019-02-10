@@ -15,9 +15,12 @@
 			MouseHandler.clientY = e.clientY;
 		}	
 		canvas.onclick = function (e) {
+			changeTransition();
+			/*
 			if (SceneHandler.scene == 0 && drawMain.transition == 0){
 				drawMain.transition = drawMain.menuState;
 			}
+			*/
 		}
 	}
 

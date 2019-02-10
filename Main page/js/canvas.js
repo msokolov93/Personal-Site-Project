@@ -11,6 +11,8 @@
 		
 		setStyleCanvas(ctx1);
 		setStyleCanvas(ctx2);		
+		//console.log("context1 size = [" + ctx1.canvas.width + "; " + ctx1.canvas.height + "] ");
+		//console.log("context1 size = [" + ctx2.canvas.width + "; " + ctx2.canvas.height + "] ");
 	}
 	
 	function setSizeCanvas(context){ //no var context might be error
