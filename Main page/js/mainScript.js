@@ -49,6 +49,9 @@ window.onload = function(){
 		
 		initUpdated();  // draw curves and text
 		console.log("initUpdated worked");
+		
+		initGoogleDoc();
+		console.log("Google Doc worked");
 	}
 	
 	function initEvents(){ 
@@ -300,15 +303,17 @@ window.onload = function(){
 	}		
 	
 	drawTransition.prototype.resumeStateThree = function(context){
-		document.getElementById("canvascontainer").style.display = "none";
-		document.getElementById("resumecontainer").style.display = "block";
-		var iframe = document.getElementById("iframe");
-		iframe.src = "https://docs.google.com/document/d/e/2PACX-1vTH1rrEZw_vCU4DcB1hvA6kGtEZF18kN4i2eno-bb6idqxZAHuoGyfANAZlWGOoMCYYy_JAbbQ1XyD0/pub?embedded=true";
-		iframe.style.visibility = "visible";
-		document.body.style.overflow = "scroll";
+		// document.getElementById("canvascontainer").style.display = "none";
+		// document.getElementById("resumecontainer").style.display = "block";
+		//var iframe = document.getElementById("iframe");
+		//iframe.src = "https://docs.google.com/document/d/e/2PACX-1vTH1rrEZw_vCU4DcB1hvA6kGtEZF18kN4i2eno-bb6idqxZAHuoGyfANAZlWGOoMCYYy_JAbbQ1XyD0/pub?embedded=true";
+		//iframe.style.visibility = "visible";
+		//document.body.style.overflow = "scroll";
 		//document.getElementById("actionCanvas").style.display = "none";
 		//document.getElementById("backgroundCanvas").style.display = "none";
-		this.resumeState = 3;
+		// this.resumeState = 3;
+		startResumeScene();
+		SceneHandler.scene = 1;
 	}
 	
 	//    || Resume code end ||

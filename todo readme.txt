@@ -8,12 +8,6 @@ Main Page:
 
 	- Mobile devices event optimization
 	
-	
-	Person animation
-	
-		- From right to left a curve is following the bottom line and replacing it
-		- Whole scene is moving up to dissapear in X seconds with Sin speed
-	
 About Page:
 
 	- Ajax load of the whole page
