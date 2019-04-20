@@ -91,7 +91,6 @@ window.onload = function(){
 	}
 	
 	SceneHandler.prototype.Menu = function(){
-		//console.log("SceneHandler.Menu.switch is avaliable");
 		switch (drawMain.transition){
 			case 0: 
 				drawMain.drawMenu(ctx1);
@@ -113,7 +112,7 @@ window.onload = function(){
 				}	
 			break;
 			case 3:
-				if ( drawMain.checkAim() ){
+				if ( drawMain.transition != 0 ){
 					drawTransition.toPerson();
 				}
 				else {
@@ -135,7 +134,7 @@ window.onload = function(){
 	MouseHandler.prototype.eventHandler = function(canvas){
 		window.onresize = function(){ 
 		// resize window event
-			if( drawMain.transition != 0 ){
+			if( drawMain.transition == 0 ){
 				setCanvas();
 				drawMain.Constructor();
 			}
@@ -183,15 +182,13 @@ window.onload = function(){
 		this.twoFrames = 53; 
 		this.twoRate = this.alpha / this.twoFrames ; // (pi / 2) / frames
 		
-		// Resume State Three
+		// About State Three
 		this.scale = 0;
 			
-		// About State One			
-		this.step = (Math.PI / 2) / this.oneFrames ;		
-		this.median = window.innerHeight / 2 ; // never used in this state
-		this.velocity = this.median / this.oneFrames;
-		this.velMax = this.velocity * 2;
-		this.state = 0;
+		// Person State One			
+		this.betta = (Math.PI / 2) / this.oneFrames ;		
+		this.velocity = window.innerHeight / this.oneFrames;
+		this.delta = 0;
 	}
 	
 	//    == Resume code start ==
@@ -207,7 +204,9 @@ window.onload = function(){
 			case 2:
 				drawTransition.resumeStateThree();
 			break;
-			default:
+			case 3:
+				console.log("Scene = Resume");
+				sceneHandler.scene = 1;
 			break;
 		}
 	}
@@ -298,22 +297,12 @@ window.onload = function(){
 		drawMain.drawName(context, drawMain.curves[2], drawMain.curves[3], "PERSON");
 		if (Math.sin(this.alpha) == 1){
 			this.resumeState = 2;
-			//ctx1.clearRect(0, 0, window.innerWidth, window.innerHeight);
-			//document.getElementById("actionCanvas").style.visibility = "hidden";
-			//document.getElementById("resumedoc").style.zIndex = "100";
 		}		
 	
 	}		
 	
 	drawTransition.prototype.resumeStateThree = function(context){
-		document.getElementById("canvascontainer").style.display = "none";
-		document.getElementById("resumecontainer").style.display = "block";
-		var iframe = document.getElementById("iframe");
-		iframe.src = "https://docs.google.com/document/d/e/2PACX-1vTH1rrEZw_vCU4DcB1hvA6kGtEZF18kN4i2eno-bb6idqxZAHuoGyfANAZlWGOoMCYYy_JAbbQ1XyD0/pub?embedded=true";
-		iframe.style.visibility = "visible";
-		document.body.style.overflow = "scroll";
-		//document.getElementById("actionCanvas").style.display = "none";
-		//document.getElementById("backgroundCanvas").style.display = "none";
+		startResumeScene();
 		this.resumeState = 3;
 	}
 	
@@ -334,6 +323,10 @@ window.onload = function(){
 			case 2:
 				drawTransition.aboutStateThree(ctx1);
 				console.log("aboutStateThree");
+			break;
+			case 3:
+				console.log("Scene = About");
+				sceneHandler.scene = 2;
 			break;
 		}
 	}
@@ -431,8 +424,10 @@ window.onload = function(){
 		//drawMain.drawName(context, drawMain.curves[1], drawMain.curves[2], "ABOUT");
 		drawMain.drawName(context, drawMain.curves[2], drawMain.curves[3], "PERSON");
 		
-		//console.log("Scale = " + this.scale);
 		context.restore();
+		//if ( this.scale <= 75){
+		//	drawTransition.aboutState = 3;
+		//}
 	}
 	
 	//    || About code start ||
@@ -444,45 +439,32 @@ window.onload = function(){
 			case 0: 
 				drawTransition.personStateOne(ctx1);
 			break;
+			case 1: 
+				sceneHandler.scene = 3;
+				console.log("Scene = Person");
+			break;
 		}
-		
-		/*transform: scaleY(-1); // value goes 1 to -100
-		transform: rotate(90deg); // value goes 0 to 90 */
-		// But rotations are performed around the point with respect to distance from dot to rotation point.
-		// is it possible to make transition seamless??
-		
-		// Discrete persists in gradient solution, tears are inevitable
-		
-		// contour (line-curve-curve-line) is a "rail" for this animation - 
-		// animation is a carriage that at the start 
-		
-		// lets look the carrige only
-		// gradient transform is needed
-		
-		// lets take all pixels in carrige - N pixels fills 100% of transformation, so every pixel is doing just
-		// 100/N % of transform. But is it possible to send 
-		
-		// every pixel gets transformed 
 	}
 	
 	drawTransition.prototype.personStateOne = function(context){	
 
 		drawMain.clearLines(context);	
 		drawMain.clearCurves(context);
-						
-		this.state += Math.sin(this.step) * this.velMax;
-						
+	
+	
+		this.delta += Math.sin(this.betta) * this.velocity; // sin( pi/(2 * 27) ) * window.innerHeight / 27
+	
 		for(let i = 0; i < 3; i++){
-			drawMain.curves[i].x += this.state / 2; // top goes right
-			drawMain.lines[i].x += this.state / 2;
-			drawMain.curves[i].y -= this.state;		// top goes up
-			drawMain.lines[i].y -= this.state;
+			drawMain.curves[i].x += this.delta / 2; // top goes right
+			drawMain.lines[i].x += this.delta / 2;
+			drawMain.curves[i].y -= this.delta;		// top goes up
+			drawMain.lines[i].y -= this.delta;
 		}
 		
-		drawMain.curves[3].x -= this.state / 2; 	// bottom goes left
-		drawMain.lines[3].x -= this.state / 2;	
-		drawMain.curves[3].y += this.state; 		// bottom goes down
-		drawMain.lines[3].y += this.state;			
+		drawMain.curves[3].x -= this.delta / 2; 	// bottom goes left
+		drawMain.lines[3].x -= this.delta / 2;	
+		drawMain.curves[3].y += this.delta; 		// bottom goes down
+		drawMain.lines[3].y += this.delta;			
 		
 		drawMain.drawLines(context);
 		drawMain.drawCurves(context);
@@ -492,6 +474,10 @@ window.onload = function(){
 		//drawMain.drawName(context, drawMain.curves[2], drawMain.curves[2]+, "PERSON");
 		let y0 = (drawMain.curves[2].y + (drawMain.curves[2].y - drawMain.curves[1].y) / 2 + FontSize / 3); // height for 3rd word
 		context.fillText("PERSON", ( drawMain.curves[2].getCrestX() - context.measureText("PERSON").width / 2) , y0);
+		
+		if (drawMain.lines[2].y <= -100){
+			drawTransition.personState = 1;
+		}	
 	}
 	//    || Person code end ||
 	

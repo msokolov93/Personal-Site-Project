@@ -1,9 +1,9 @@
-window.onload = function() {
 	var centerY = (window.innerHeight - 630) / 2;
 	document.getElementById("personcontainer").style.marginTop = centerY + "px";
 	var homeVisible = 0;
 	//var clientX, clientY;
 	
+	/*
 	document.onmousemove = function (e) {
 		var clientX = e.clientX;
 		var clientY = e.clientY;
@@ -17,5 +17,4 @@ window.onload = function() {
 		
 		document.getElementById("myhand").style.marginLeft = sideX*10 + 'px';
 		document.getElementById("myhand").style.marginTop = sideY*10 + 'px';
-	}	
-}
+	}	*/

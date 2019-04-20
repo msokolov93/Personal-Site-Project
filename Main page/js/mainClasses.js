@@ -13,7 +13,7 @@
 	}
 	
 	DrawMain.prototype.Constructor = function(context1, context2){ // Puts in place static parts of menu page
-		drawMain.getCanvas(context1, context2); 
+		drawMain.getCanvas(ctx1, ctx2); 
 		drawMain.createCurves();
 		drawMain.createLines();
 	}
@@ -208,7 +208,7 @@
 	Line.prototype.drawLine = function(context){
 		let y = this.y;
 		let gap = this.gap;
-		let endx = drawMain.endx;
+		let endx = context.canvas.width;
 		let length = (endx - gap) / 2 + this.x;
 		context.save();
 		context.beginPath();
