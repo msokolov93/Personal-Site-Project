@@ -1,6 +1,11 @@
+
+
+function startPersonScene(){
 	var centerY = (window.innerHeight - 630) / 2;
+	
 	document.getElementById("personcontainer").style.marginTop = centerY + "px";
-	var homeVisible = 0;
+	document.getElementById("personcontainer").style.display = "block";
+}
 	//var clientX, clientY;
 	
 	/*

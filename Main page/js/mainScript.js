@@ -202,11 +202,9 @@ window.onload = function(){
 				drawTransition.resumeStateTwo(ctx1);
 			break;
 			case 2:
-				drawTransition.resumeStateThree();
-			break;
-			case 3:
 				console.log("Scene = Resume");
 				sceneHandler.scene = 1;
+				startResumeScene();
 			break;
 		}
 	}
@@ -300,11 +298,7 @@ window.onload = function(){
 		}		
 	
 	}		
-	
-	drawTransition.prototype.resumeStateThree = function(context){
-		startResumeScene();
-		this.resumeState = 3;
-	}
+
 	
 	//    || Resume code end ||
 	
@@ -425,9 +419,9 @@ window.onload = function(){
 		drawMain.drawName(context, drawMain.curves[2], drawMain.curves[3], "PERSON");
 		
 		context.restore();
-		//if ( this.scale <= 75){
-		//	drawTransition.aboutState = 3;
-		//}
+		if ( this.scale >= 75){
+			drawTransition.aboutState = 3;
+		}
 	}
 	
 	//    || About code start ||
@@ -440,8 +434,9 @@ window.onload = function(){
 				drawTransition.personStateOne(ctx1);
 			break;
 			case 1: 
-				sceneHandler.scene = 3;
 				console.log("Scene = Person");
+				sceneHandler.scene = 3;
+				startPersonScene();
 			break;
 		}
 	}
@@ -450,7 +445,6 @@ window.onload = function(){
 
 		drawMain.clearLines(context);	
 		drawMain.clearCurves(context);
-	
 	
 		this.delta += Math.sin(this.betta) * this.velocity; // sin( pi/(2 * 27) ) * window.innerHeight / 27
 	
@@ -479,6 +473,7 @@ window.onload = function(){
 			drawTransition.personState = 1;
 		}	
 	}
+
 	//    || Person code end ||
 	
 	//   ||| Transition code end |||
