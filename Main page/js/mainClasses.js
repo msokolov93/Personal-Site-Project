@@ -73,7 +73,8 @@
 		}
 	}
 	
-	DrawMain.prototype.clearCurves = function(context){ // clears the area with curves !*math incorrect*!
+	/*
+	DrawMain.prototype.clearCurvesOld = function(context){ // clears the area with curves (center)
 		var endx = drawMain.endx;
 		var endy = drawMain.endy;
 	
@@ -85,8 +86,15 @@
 		
 		context.save();
 		context.fillStyle = 'rgb(255,255,255,1)';
-		context.fillRect(x1 ,y1-drawMain.curveHeight-1, length, height+2*drawMain.curveHeight); // top left to bottom right
+		context.fillRect(x1 ,y1-drawMain.curveHeight-10, length, height+2*drawMain.curveHeight); // top left to bottom right
 		context.restore();
+	}
+	*/
+	
+	DrawMain.prototype.clearCurves = function(context){
+		for (let i = 0; i < this.lineNum; i++){
+			this.curves[i].clearCurve(context);
+		}
 	}
 	
 	DrawMain.prototype.checkState = function(context){ // checks position of cursor and changes state of animation
@@ -189,8 +197,9 @@
 	
 	//   === Line class start ===
 	
-	function Line (y = 0, gap = 400){
+	function Line (y = 0, gap = 400, x = 0){ // Line needs X parameter that says where a gap starts. Middle minus half of gap by default
 		//this.endx = drawMain.endx;
+		this.x = x;
 		this.y = y;
 		this.gap = gap;
 		//this.length = (endx - gap) / 2;
@@ -200,7 +209,7 @@
 		let y = this.y;
 		let gap = this.gap;
 		let endx = drawMain.endx;
-		let length = (endx - gap) / 2;
+		let length = (endx - gap) / 2 + this.x;
 		context.save();
 		context.beginPath();
 		
@@ -264,6 +273,13 @@
 		context.beginPath();
 		this.pathCurve(context);
 		context.stroke();			
+		context.restore();
+	}
+	
+	Curve.prototype.clearCurve = function(context){
+		context.save();
+		context.fillStyle = 'rgb(255,255,255,1)';
+		context.fillRect(this.x , this.y-drawMain.curveHeight-1, this.length, this.height+2*drawMain.curveHeight); // top left to bottom right
 		context.restore();
 	}
 	

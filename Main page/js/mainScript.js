@@ -172,6 +172,7 @@ window.onload = function(){
 	function drawTransition(){ // static scope for transition animations
 		this.resumeState = 0; // state of resume transition
 		this.aboutState = 0;
+		this.personState = 0;
 		
 		// Resume State One
 		this.alpha = Math.PI / 2;
@@ -181,17 +182,19 @@ window.onload = function(){
 		// Resume State Two
 		this.twoFrames = 53; 
 		this.twoRate = this.alpha / this.twoFrames ; // (pi / 2) / frames
-		this.median = window.innerHeight / 2 ; // never used in this state
+		
+		// Resume State Three
+		this.scale = 0;
 			
 		// About State One			
-		this.scale = 1;		
+		this.step = (Math.PI / 2) / this.oneFrames ;		
+		this.median = window.innerHeight / 2 ; // never used in this state
+		this.velocity = this.median / this.oneFrames;
+		this.velMax = this.velocity * 2;
+		this.state = 0;
 	}
 	
 	//    == Resume code start ==
-	
-	function initDocs(){
-
-	}
 	
 	drawTransition.prototype.toResume = function(){
 		switch (drawTransition.resumeState){			
@@ -303,17 +306,15 @@ window.onload = function(){
 	}		
 	
 	drawTransition.prototype.resumeStateThree = function(context){
-		// document.getElementById("canvascontainer").style.display = "none";
-		// document.getElementById("resumecontainer").style.display = "block";
-		//var iframe = document.getElementById("iframe");
-		//iframe.src = "https://docs.google.com/document/d/e/2PACX-1vTH1rrEZw_vCU4DcB1hvA6kGtEZF18kN4i2eno-bb6idqxZAHuoGyfANAZlWGOoMCYYy_JAbbQ1XyD0/pub?embedded=true";
-		//iframe.style.visibility = "visible";
-		//document.body.style.overflow = "scroll";
+		document.getElementById("canvascontainer").style.display = "none";
+		document.getElementById("resumecontainer").style.display = "block";
+		var iframe = document.getElementById("iframe");
+		iframe.src = "https://docs.google.com/document/d/e/2PACX-1vTH1rrEZw_vCU4DcB1hvA6kGtEZF18kN4i2eno-bb6idqxZAHuoGyfANAZlWGOoMCYYy_JAbbQ1XyD0/pub?embedded=true";
+		iframe.style.visibility = "visible";
+		document.body.style.overflow = "scroll";
 		//document.getElementById("actionCanvas").style.display = "none";
 		//document.getElementById("backgroundCanvas").style.display = "none";
-		// this.resumeState = 3;
-		startResumeScene();
-		SceneHandler.scene = 1;
+		this.resumeState = 3;
 	}
 	
 	//    || Resume code end ||
@@ -324,12 +325,15 @@ window.onload = function(){
 		switch (drawTransition.aboutState){			
 			case 0: 
 				drawTransition.aboutStateOne(ctx1);
+				console.log("aboutStateOne");
 			break;
 			case 1: 
 				drawTransition.aboutStateTwo(ctx1);
+				console.log("aboutStateTwo");
 			break;
 			case 2:
 				drawTransition.aboutStateThree(ctx1);
+				console.log("aboutStateThree");
 			break;
 		}
 	}
@@ -436,6 +440,12 @@ window.onload = function(){
 	//    == Person code start ==
 	
 	drawTransition.prototype.toPerson = function(){
+		switch (drawTransition.personState){			
+			case 0: 
+				drawTransition.personStateOne(ctx1);
+			break;
+		}
+		
 		/*transform: scaleY(-1); // value goes 1 to -100
 		transform: rotate(90deg); // value goes 0 to 90 */
 		// But rotations are performed around the point with respect to distance from dot to rotation point.
@@ -455,6 +465,34 @@ window.onload = function(){
 		// every pixel gets transformed 
 	}
 	
+	drawTransition.prototype.personStateOne = function(context){	
+
+		drawMain.clearLines(context);	
+		drawMain.clearCurves(context);
+						
+		this.state += Math.sin(this.step) * this.velMax;
+						
+		for(let i = 0; i < 3; i++){
+			drawMain.curves[i].x += this.state / 2; // top goes right
+			drawMain.lines[i].x += this.state / 2;
+			drawMain.curves[i].y -= this.state;		// top goes up
+			drawMain.lines[i].y -= this.state;
+		}
+		
+		drawMain.curves[3].x -= this.state / 2; 	// bottom goes left
+		drawMain.lines[3].x -= this.state / 2;	
+		drawMain.curves[3].y += this.state; 		// bottom goes down
+		drawMain.lines[3].y += this.state;			
+		
+		drawMain.drawLines(context);
+		drawMain.drawCurves(context);
+		
+		drawMain.drawName(context, drawMain.curves[0], drawMain.curves[1], "RESUME");
+		drawMain.drawName(context, drawMain.curves[1], drawMain.curves[2], "ABOUT");
+		//drawMain.drawName(context, drawMain.curves[2], drawMain.curves[2]+, "PERSON");
+		let y0 = (drawMain.curves[2].y + (drawMain.curves[2].y - drawMain.curves[1].y) / 2 + FontSize / 3); // height for 3rd word
+		context.fillText("PERSON", ( drawMain.curves[2].getCrestX() - context.measureText("PERSON").width / 2) , y0);
+	}
 	//    || Person code end ||
 	
 	//   ||| Transition code end |||
