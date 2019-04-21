@@ -16,9 +16,9 @@
 				<div class="ResumeDiv" id="resumediv">
 					<table class="HomeButton" id="homeButton"> 
 						<tr>
-							<td><button class="btnHome" id="home2">ABOUT</button></td>		
+							<td><button class="btnHome" id="home2" onclick="DisplayScene('aboutcontainer')" >ABOUT</button></td>		
 							<td><button class="btnHomeMain" id="home0"></button></td>
-							<td><button class="btnHome" id="home1">PERSON</button></td>
+							<td><button class="btnHome" id="home1" onclick="DisplayScene('personcontainer')" >PERSON</button></td>
 						</tr>
 					</table>
 					<iframe id="iframe" frameborder="0" src="">
@@ -26,6 +26,10 @@
 				</div>
 			</div>
 			<!-- Resume Ends -->
+			<!-- About Starts -->
+			<div class="AboutContainer" id="aboutcontainer">
+			</div>
+			<!-- About Ends -->
 			<!-- Person Starts -->
 			<div class="PersonContainer" id="personcontainer">
 				<div class="person" style="width:630px; height:630px;  display: inline-block; ">
@@ -41,9 +45,9 @@
 						<td colspan="2">
 							<table class="HomeButton" id="homeButton" style="margin-left: -100px;"> 
 								<tr>
-									<td><button class="btnHome" id="home2">RESUME</button></td>		
+									<td><button class="btnHome" id="home2" onclick="DisplayScene('resumecontainer')">RESUME</button></td>		
 									<td><button class="btnHomeMain" id="home0"></button></td>
-									<td><button class="btnHome" id="home1">ABOUT</button></td>
+									<td><button class="btnHome" id="home1" onclick="DisplayScene('aboutcontainer')">ABOUT</button></td>
 								</tr>
 							</table>
 						</td>
@@ -72,8 +76,8 @@
   </body>
   <script src="js/canvas.js"></script>
   <script src="js/mainClasses.js"></script> 
-  <script src="js/mainScript.js"></script>
   <script src="js/resumeScript.js"></script>
   <script src="js/personScript.js"></script>
   <script src="js/homeButton.js"></script>
+  <script src="js/mainScript.js"></script>
 </html>    

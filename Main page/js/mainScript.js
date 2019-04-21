@@ -33,7 +33,7 @@ var mouseY = 0;
 
 var fpsInterval, startTime, now, then, elapsed;
 
-window.onload = function(){
+
 
 	//  === Initialize operations start ===
 	function init(){
@@ -66,12 +66,6 @@ window.onload = function(){
 		requestAnimationFrame(sceneHandler.Updated);
 	}
 	
-	function changeTransition(){
-		if (SceneHandler.scene == 0 && drawMain.transition == 0){
-			drawMain.transition = drawMain.menuState;
-		}
-	}
-	
 	//  ||| Initialize operations end |||
 	
 	//   === Screen handler class start ===
@@ -96,28 +90,13 @@ window.onload = function(){
 				drawMain.drawMenu(ctx1);
 			break;
 			case 1:
-				if ( drawMain.transition != 0 ){
-					drawTransition.toResume();
-				}
-				else {
-					drawMain.drawMenu(ctx1);
-				}						
+				drawTransition.toResume();						
 			break;
 			case 2:
-				if ( drawMain.transition != 0 ){
-					drawTransition.toAbout();
-				}
-				else {
-					drawMain.drawMenu();
-				}	
+				drawTransition.toAbout();
 			break;
 			case 3:
-				if ( drawMain.transition != 0 ){
-					drawTransition.toPerson();
-				}
-				else {
-					drawMain.drawMenu();
-				}		
+				drawTransition.toPerson();
 			break;
 		}			
 	}
@@ -146,9 +125,6 @@ window.onload = function(){
 			mouseY = e.clientY;
 		}	
 		canvas.onclick = function (e) {
-			//console.log("clicked at [" + e.clientX + "; " + e.clientY + "]; ");
-			//console.log("sceneHandler.scene = " + sceneHandler.scene + "; drawMain.transition = " + drawMain.transition + "; ");
-			//console.log("drawMain.menuState = " + drawMain.menuState);
 			if (sceneHandler.scene == 0 && drawMain.transition == 0){
 				drawMain.transition = drawMain.menuState;
 			}
@@ -168,7 +144,10 @@ window.onload = function(){
 	
 	//   === Transition code start ===
 	
-	function drawTransition(){ // static scope for transition animations
+	function DrawTransition(){ // static scope for transition animations
+	}
+	
+	DrawTransition.prototype.init = function(){
 		this.resumeState = 0; // state of resume transition
 		this.aboutState = 0;
 		this.personState = 0;
@@ -193,7 +172,7 @@ window.onload = function(){
 	
 	//    == Resume code start ==
 	
-	drawTransition.prototype.toResume = function(){
+	DrawTransition.prototype.toResume = function(){
 		switch (drawTransition.resumeState){			
 			case 0: 
 				drawTransition.resumeStateOne(ctx1);
@@ -209,7 +188,7 @@ window.onload = function(){
 		}
 	}
 	
-	drawTransition.prototype.resumeStateOne = function(context){
+	DrawTransition.prototype.resumeStateOne = function(context){
 		drawMain.changeState(context, 0); 	
 		var height = drawMain.curves[0].y;
 		drawMain.clearLines(context);
@@ -255,7 +234,7 @@ window.onload = function(){
 		}
 	}
 	
-	drawTransition.prototype.resumeStateTwo = function(context){
+	DrawTransition.prototype.resumeStateTwo = function(context){
 		var span = drawMain.lineSpan;
 		drawMain.clearLines(context);
 		
@@ -304,7 +283,7 @@ window.onload = function(){
 	
 	//    == About code start ==
 	
-	drawTransition.prototype.toAbout = function(){
+	DrawTransition.prototype.toAbout = function(){
 		switch (drawTransition.aboutState){			
 			case 0: 
 				drawTransition.aboutStateOne(ctx1);
@@ -325,7 +304,7 @@ window.onload = function(){
 		}
 	}
 	
-	drawTransition.prototype.aboutStateOne = function(context){ // doesnt work on page resize
+	DrawTransition.prototype.aboutStateOne = function(context){ // doesnt work on page resize
 		
 		if( drawMain.menuState == 2 && drawMain.checkAim() == 1){
 			this.x = Math.round( drawMain.curves[0].getCrestX() );
@@ -361,7 +340,7 @@ window.onload = function(){
 		}
 	}
 	
-	drawTransition.prototype.aboutStateTwo = function(context){ // !* Recreated curves during resize dont inherit state *!
+	DrawTransition.prototype.aboutStateTwo = function(context){ // !* Recreated curves during resize dont inherit state *!
 		drawMain.curves[1].setAim(-1);
 		
 		drawMain.clearLines(context);
@@ -392,7 +371,7 @@ window.onload = function(){
 		}
 	}
 	
-	drawTransition.prototype.aboutStateThree = function(context){ // enlarges the page
+	DrawTransition.prototype.aboutStateThree = function(context){ // enlarges the page
 		if (this.scale < 75){
 			this.scale += 1.5;
 		}			
@@ -428,7 +407,7 @@ window.onload = function(){
 	
 	//    == Person code start ==
 	
-	drawTransition.prototype.toPerson = function(){
+	DrawTransition.prototype.toPerson = function(){
 		switch (drawTransition.personState){			
 			case 0: 
 				drawTransition.personStateOne(ctx1);
@@ -441,7 +420,7 @@ window.onload = function(){
 		}
 	}
 	
-	drawTransition.prototype.personStateOne = function(context){	
+	DrawTransition.prototype.personStateOne = function(context){	
 
 		drawMain.clearLines(context);	
 		drawMain.clearCurves(context);
@@ -478,14 +457,33 @@ window.onload = function(){
 	
 	//   ||| Transition code end |||
 	
+	function DisplayScene(containerName){
+		document.getElementById("canvascontainer").style.display = "none";
+		document.getElementById("resumecontainer").style.display = "none";
+		//document.getElementById("aboutcontainer").style.display = "none";
+		document.getElementById("personcontainer").style.display = "none";
+		
+		document.getElementById(containerName).style.display = "block";
+	}
+	
+	function ResumeMain(){
+		console.log("resume main");
+		setCanvas();
+		drawMain.Constructor();
+		drawMain.transition = 0;
+		drawTransition.init();
+		sceneHandler.scene = 0;
+	}
+	
+	
+	
 	// ===== Main start =====
 	
-	var drawTransition = new drawTransition();
+	var drawTransition = new DrawTransition();
 	var mouseHandler = new MouseHandler();
 	var sceneHandler = new SceneHandler();	
-	//svar drawMain = new DrawMain();
-	//MouseHandler.ale();
+	
+	drawTransition.init();
 	init();	
 	
 	// ||||| Main end |||||
-}

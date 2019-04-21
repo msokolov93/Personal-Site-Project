@@ -31,6 +31,10 @@
 	color:#000; 
 }
 
+.btnHomeMain:focus{
+	outline: 0;
+}
+
 .btnHome{
 	cursor:pointer;
 	display: inline-block;
@@ -44,4 +48,8 @@
 	border: 0;
 	border-radius: 0;
 	visibility: hidden;
+}
+
+.btnHome:focus{
+	outline:0;
 }
