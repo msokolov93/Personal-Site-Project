@@ -10,11 +10,6 @@ Main Page:
 	- Mobile devices event optimization
 	- Scene Switch handler must change the screen based on scene, not menu child functions toAbout, etc.
 	
-Resume page:
-
-	- Update resume
-	- Update resume links
-	
 About Page:
 
 	- Animation for text typing

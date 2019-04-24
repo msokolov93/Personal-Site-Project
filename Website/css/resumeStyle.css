@@ -14,9 +14,17 @@
 	max-width: 825px;
 } 
 
+.ResumeA {
+	position: absolute;
+    width: 210px;
+    margin-top: -100px;
+	margin-left: -105px;
+    left: 50%;
+}
+	
 #iframe{
 	visibility: hidden;
 	width: 100%;
 	min-width: 640px;
-	min-height: 1700px;
+	min-height: 1750px;
 }
