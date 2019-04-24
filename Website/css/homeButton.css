@@ -85,7 +85,7 @@
 .btnHomeBlack{
 	cursor:pointer;
 	display: inline-block;
-	
+	color: #fff;
 	height: 70px;
 	width: auto;
 	font-family: 'Luganskiy';

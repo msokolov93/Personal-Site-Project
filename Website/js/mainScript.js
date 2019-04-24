@@ -471,7 +471,14 @@ var fpsInterval, startTime, now, then, elapsed;
 		document.getElementById("resumecontainer").style.display = "none";
 		document.getElementById("aboutcontainer").style.display = "none";
 		document.getElementById("personcontainer").style.display = "none";
-		document.body.style.backgroundColor = "#fff";
+		
+		if (containerName == "aboutcontainer"){
+			console.log("aboutcontainer");
+			document.body.style.backgroundColor = "#000";
+		} else {
+			console.log(containerName);
+			document.body.style.backgroundColor = "#fff";
+		}
 		
 		document.getElementById(containerName).style.display = "block";
 	}

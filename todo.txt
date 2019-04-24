@@ -13,13 +13,11 @@ Main Page:
 About Page:
 
 	- Animation for text typing
-	- * Revisit text
-	- Composition
-	- Home button not showing other pages
-	- Background in and out is changed in two separate places
 	
-Person page: 
+Resume Page:
 
-	- Photoshop image	
-	- Change image
+	- Content must be shown while animation has not ended
 	
+Person Page: 
+
+	- Content must fly in while animation
