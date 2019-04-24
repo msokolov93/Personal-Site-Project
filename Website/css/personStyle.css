@@ -1,0 +1,22 @@
+.PersonContainer{
+	display: none;
+	position: fixed;
+	height: 630px;
+	width: 1000px;	
+	left: 50%;
+	top: 50%;	
+	margin-top: -300px;
+	margin-left: -500px;
+}
+
+.person{
+	width:630px; 
+	height:630px;  
+	display: inline-block;
+}
+
+.personTable{
+	position: absolute; 
+	display: inline-block; 
+	margin-top: 245px;
+}

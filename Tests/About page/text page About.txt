@@ -1,0 +1,10 @@
+<p>This website was designed as a digital creative portfolio 
+and showoff for learning new programming skills (html5 canvas) </p>
+<br>
+<p>What always interested me the most - means of communications between a machine and a person. 
+How to make it easier for the person to get involved in this communication? </p>
+<br>
+<p>I've worked with clouds, web apps, design of interfaces, 
+and even tried to program native mobile application once. </p>
+<br>
+<p>I'm looking for the right people to make great products with. </p>

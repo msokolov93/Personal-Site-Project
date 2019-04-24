@@ -1,0 +1,17 @@
+.AboutContainer{
+	display: none;
+	position: fixed;
+	height: 630px;
+	width: 640px;	
+	left: 50%;
+	top: 50%;	
+	margin-top: -315px;
+	margin-left: -320px;
+}
+
+.AboutContent{
+	width:640px; 
+	height:auto; 
+	color: #9cff91;
+	font-family: DINPro-Light;
+}

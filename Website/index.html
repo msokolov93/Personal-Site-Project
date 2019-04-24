@@ -5,6 +5,7 @@
 		<title>Michael Sokolov</title>
 		<link rel="stylesheet" type="text/css" href="css/mainStyle.css">
 		<link rel="stylesheet" type="text/css" href="css/resumeStyle.css">
+		<link rel="stylesheet" type="text/css" href="css/aboutStyle.css">
 		<link rel="stylesheet" type="text/css" href="css/personStyle.css">
 		<link rel="stylesheet" type="text/css" href="css/homeButton.css"> 
 		
@@ -28,16 +29,32 @@
 			<!-- Resume Ends -->
 			<!-- About Starts -->
 			<div class="AboutContainer" id="aboutcontainer">
+				<table class="HomeButton" id="homeButton"> 
+					<tr>
+						<td><button class="btnHome btnHomeBlack" id="home2" onclick="DisplayScene('resumecontainer')" >RESUME</button></td>		
+						<td><button class="btnHomeMain btnHomeMainBlack" id="home0"></button></td>
+						<td><button class="btnHome btnHomeBlack" id="home1" onclick="DisplayScene('personcontainer')" >PERSON</button></td>
+					</tr>				
+				</table>
+				<div class="AboutContent">
+					<p>This is a project for a personal portfolio website to show off some javascript skills,
+					test abilities of HTML 5 Canvas and produce some breakthrough web-design.</p>
+					<p>What always interested me the most - means of communications between a machine and a person. 
+					How to make it easier for the person to get involved in this communication? </p>
+					<p>I've worked with clouds, web apps, design of interfaces, 
+					and even tried to program native mobile application once. </p>
+					<p>Now I'm looking for the right people to make great products with. </p>
+				</div>	
 			</div>
 			<!-- About Ends -->
 			<!-- Person Starts -->
 			<div class="PersonContainer" id="personcontainer">
-				<div class="person" style="width:630px; height:630px;  display: inline-block; ">
+				<div class="person">
 					<img id="myhand" src="img/person/myhand.png" width="600" height="600" style="position: absolute; z-index: 1; margin-left: 10px; margin-top: 10px;">
 					<img id="me" src="img/person/me.png" width="600" height="600" style="position: absolute; z-index: 2; margin-left:20px; margin-top: 20px;">
 					<img id="border" src="img/person/border.png" width="630" height="630" style="position: absolute; z-index: 3; margin-left:-20px; margin-top:00px;">
 				</div>
-				<table style="position: absolute; display: inline-block; margin-top:245px;">
+				<table class="personTable">
 					<tr>
 						<td></td>
 						<td></td>
@@ -77,6 +94,7 @@
   <script src="js/canvas.js"></script>
   <script src="js/mainClasses.js"></script> 
   <script src="js/resumeScript.js"></script>
+  <script src="js/aboutScript.js"></script>
   <script src="js/personScript.js"></script>
   <script src="js/homeButton.js"></script>
   <script src="js/mainScript.js"></script>

@@ -1,8 +1,6 @@
 
 
 function startPersonScene(){	
-	//var centerY = (window.innerHeight - 630) / 2;
-	//document.getElementById("personcontainer").style.marginTop = centerY + "px";
 	document.getElementById("canvascontainer").style.display = "none";
 	document.getElementById("personcontainer").style.display = "block";
 	animatePersonScene();

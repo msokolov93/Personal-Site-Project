@@ -75,6 +75,14 @@ var fpsInterval, startTime, now, then, elapsed;
 	}
 	
 	SceneHandler.prototype.Updated = function(){
+		/*switch (sceneHandler.scene){
+			case 0:
+				sceneHandler.Menu();
+			break;
+			case 0:
+				sceneHandler.Menu();
+			break;
+		}*/
 		if (sceneHandler.scene == 0){
 			sceneHandler.Menu();
 		}
@@ -300,6 +308,7 @@ var fpsInterval, startTime, now, then, elapsed;
 			case 3:
 				console.log("Scene = About");
 				sceneHandler.scene = 2;
+				startAboutScene();
 			break;
 		}
 	}
@@ -460,8 +469,9 @@ var fpsInterval, startTime, now, then, elapsed;
 	function DisplayScene(containerName){
 		document.getElementById("canvascontainer").style.display = "none";
 		document.getElementById("resumecontainer").style.display = "none";
-		//document.getElementById("aboutcontainer").style.display = "none";
+		document.getElementById("aboutcontainer").style.display = "none";
 		document.getElementById("personcontainer").style.display = "none";
+		document.body.style.backgroundColor = "#fff";
 		
 		document.getElementById(containerName).style.display = "block";
 	}
