@@ -12,7 +12,7 @@ Main Page:
 	
 Resume page:
 
-	- Update resumes
+	- Update resume
 	- Update resume links
 	
 About Page:
@@ -20,8 +20,11 @@ About Page:
 	- Animation for text typing
 	- * Revisit text
 	- Composition
+	- Home button not showing other pages
+	- Background in and out is changed in two separate places
 	
 Person page: 
 
 	- Photoshop image	
 	- Change image
+	
