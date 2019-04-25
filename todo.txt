@@ -2,22 +2,8 @@ msokolov.xyz Todo List
 
 General: 
 
-- Load whole website in one piece (loading animation)
-- Move DrawTransition class to mainClass.js
-
 Main Page:
 
 	- Mobile devices event optimization
-	- Scene Switch handler must change the screen based on scene, not menu child functions toAbout, etc.
 	
-About Page:
-
-	- Animation for text typing
-	
-Resume Page:
-
-	- Content must be shown while animation has not ended
-	
-Person Page: 
-
-	- Content must fly in while animation
+	- Figure out SceneHandler.prototype.Updated with scene list and DisplayScene function.

@@ -38,15 +38,17 @@
 						<td><button class="btnHome btnHomeBlack" id="home1" onclick="DisplayScene('personcontainer')" >PERSON</button></td>
 					</tr>				
 				</table>
-				<div class="AboutContent">
-					<p>This is a project for a personal portfolio website to show off some javascript skills,
-					test abilities of HTML 5 Canvas and produce some breakthrough web-design.</p>
-					<p>What always interested me the most - means of communications between a machine and a person. 
-					How to make it easier for the person to get involved in this communication? </p>
-					<p>I've worked with clouds, web apps, design of interfaces, 
-					and even tried to program native mobile application once. </p>
-					<p>Now I'm looking for the right people to make great products with. </p>
+				<div class="AboutContent" id="typed-strings">
+					<p><br><br>
+					This is a project for a personal portfolio website to show off some javascript skills,
+					test abilities of HTML 5 Canvas and produce some breakthrough web-design.<br><br>
+					What always interested me the most - means of communications between a machine and a person. 
+					How to make it easier for the person to get involved in this communication? <br><br>
+					I've worked with clouds, web apps, design of interfaces, 
+					and even tried to program native mobile application once. <br><br>
+					Now I'm looking for the right people to make great products with. </p>
 				</div>	
+				<span id="typed"></span>
 			</div>
 			<!-- About Ends -->
 			<!-- Person Starts -->
@@ -93,6 +95,7 @@
 		</div>
 	</div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
   <script src="js/canvas.js"></script>
   <script src="js/mainClasses.js"></script> 
   <script src="js/resumeScript.js"></script>

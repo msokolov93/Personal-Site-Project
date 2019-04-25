@@ -10,6 +10,15 @@
 }
 
 .AboutContent{
+	margin-top: 20px;
+	width:640px; 
+	height:auto; 
+	color: #9cff91;
+	font-family: DINPro-Light;
+}
+
+#typed{
+	margin-top: 20px;
 	width:640px; 
 	height:auto; 
 	color: #9cff91;

@@ -1,12 +1,3 @@
-
-
-function startPersonScene(){	
-	document.getElementById("canvascontainer").style.display = "none";
-	document.getElementById("personcontainer").style.display = "block";
-	animatePersonScene();
-}
-	//var clientX, clientY;
-
 function animatePersonScene(){
 	document.onmousemove = function (e) {
 		var clientX = e.clientX;
