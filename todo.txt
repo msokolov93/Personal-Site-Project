@@ -7,3 +7,5 @@ Main Page:
 	- Mobile devices event optimization
 	
 	- Figure out SceneHandler.prototype.Updated with scene list and DisplayScene function.
+
+	- Inability to move from about page
