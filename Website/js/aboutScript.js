@@ -1,2 +1,11 @@
-var aboutText = "This website was designed as a digital creative portfolio \n and showoff for learning new programming skills (html5 canvas) \n \n What always interested me the most - \n means of communications between a machine and a person. \n How to make it easier for the person to get involved in this communication? \n \n I've worked with clouds, web apps, design of interfaces, \n and even tried to program native mobile application once. \n \n I'm looking for the right people to make great products with. ";
+var aboutTextExists = 0;
 
+function runAboutText(){
+	if (aboutTextExists == 0){ 
+		var typed = new Typed('#typed', {
+			stringsElement: '#typed-strings',
+			typeSpeed: 30
+		});
+		aboutTextExists = 1;
+	}
+}
