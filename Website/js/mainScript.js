@@ -158,10 +158,8 @@ var fpsInterval, startTime, now, then, elapsed;
 		document.getElementById("personcontainer").style.display = "none";
 		
 		if (containerName == "aboutcontainer"){
-			var typed = new Typed('#typed', {
-				stringsElement: '#typed-strings',
-				typeSpeed: 30
-			});
+			
+			runAboutText();
 			
 			console.log("aboutcontainer");
 			document.body.style.backgroundColor = "#000";
