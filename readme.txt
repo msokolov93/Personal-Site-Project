@@ -1,6 +1,6 @@
 -= How to use =-
 
-Download Main page and launch index.html in browser.
+Download Website directory and launch index.html in browser.
 
 -= Disclamer =-
 
